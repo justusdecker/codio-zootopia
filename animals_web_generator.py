@@ -8,12 +8,14 @@ def load_and_rewrite_html(path_input:str, path_output: str) -> None:
     html = html.replace('__REPLACE_ANIMALS_INFO__',generate_unsorted_list())
     with open(path_output,'w') as file_out:
         file_out.write(html)
+        
 def generate_unsorted_list():
     html_string = ''
     for animal in animals:
         type_failsave = animal["characteristics"].get('type',None)
-        html_string += f"{animal['name']}\n{animal['characteristics']['diet']}\n{animal['locations'][0]}\n{"\n" + type_failsave if type_failsave is not None else ""}\n"
+        html_string += f"<li class=\"cards__item\">{animal['name']}<br>\n{animal['characteristics']['diet']}<br>\n{animal['locations'][0]}<br>\n{"\n" + type_failsave + '<br>' if type_failsave is not None else ""}\n</li>\n"
     return html_string
+
 if __name__ == '__main__':
     
     load_and_rewrite_html('animals_template.html','animals.html')
