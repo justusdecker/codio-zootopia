@@ -13,7 +13,9 @@ def generate_unsorted_list():
     html_string = ''
     for animal in animals:
         type_failsave = animal["characteristics"].get('type',None)
-        html_string += f"<li class=\"cards__item\">{animal['name']}<br>\n{animal['characteristics']['diet']}<br>\n{animal['locations'][0]}<br>\n{"\n" + type_failsave + '<br>' if type_failsave is not None else ""}\n</li>\n"
+        nam, die, loc = animal['name'], animal['characteristics']['diet'], animal['locations'][0], 
+        typ_ext = "\n<strong>Type: </strong>\n" + type_failsave + '<br>' if type_failsave is not None else ""
+        html_string += f'<li class="cards__item"><div class="card__title">{nam}</div>\n<p class="card__text">\n<strong>Diet: </strong>{die}<br>\n<strong>Location: </strong>{loc}<br>{typ_ext}\n</p>\n</li>\n'
     return html_string
 
 if __name__ == '__main__':
